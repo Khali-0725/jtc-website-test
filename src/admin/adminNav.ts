@@ -65,6 +65,13 @@ export const adminNavSections: AdminNavSection[] = [
         icon: 'shield',
         roles: ['ADMIN', 'SUPER_ADMIN'],
       },
+      {
+        label: 'Branding',
+        to: '/admin/settings',
+        icon: 'image',
+        permission: 'settings:write',
+        roles: ['SUPER_ADMIN'],
+      },
     ],
   },
 ];
