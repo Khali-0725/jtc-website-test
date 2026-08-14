@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Jesus The Counselor Cavite">
+  <!-- Dark rounded background so the icon is visible on light browser tabs -->
+  <rect x="0" y="0" width="32" height="32" rx="7" fill="#05070A" />
+  <!-- Dove swoosh (placeholder glyph — echoes the site logo, not a redesign) -->
+  <path
+    d="M6 20c6 1 10-2 13-8 1 3 0 6-2 8 3 0 6-1 8-4-1 6-7 10-13 10-3 0-6-2-6-6z"
+    fill="#f4f7fb"
+    opacity="0.95"
+  />
+  <!-- Cross -->
+  <rect x="20.5" y="6" width="2.6" height="15" rx="1" fill="#2e8bff" />
+  <rect x="17" y="10.2" width="9.6" height="2.6" rx="1" fill="#2e8bff" />
+</svg>
