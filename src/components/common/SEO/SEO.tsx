@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { siteConfig } from '@/config/siteConfig';
+import { useSettings } from '@/context/SettingsContext';
 
 interface SEOProps {
   title?: string;
@@ -11,13 +12,23 @@ interface SEOProps {
   jsonLd?: Record<string, unknown>;
 }
 
+/* Resolve an image reference to an absolute URL. Full http(s) or
+   protocol-relative URLs are used as-is; site-relative paths are
+   prefixed with the configured site URL. */
+function resolveImageUrl(ref: string): string {
+  if (/^(https?:)?\/\//i.test(ref)) return ref;
+  return `${siteConfig.seo.siteUrl}${ref}`;
+}
+
 export function SEO({ title, description, image, path, type = 'website', noindex, jsonLd }: SEOProps) {
+  const { settings } = useSettings();
   const fullTitle = title
     ? siteConfig.seo.titleTemplate.replace('%s', title)
     : siteConfig.seo.defaultTitle;
   const desc = description ?? siteConfig.seo.defaultDescription;
   const url = `${siteConfig.seo.siteUrl}${path ?? ''}`;
-  const ogImage = `${siteConfig.seo.siteUrl}${image ?? siteConfig.seo.ogImage}`;
+  // Precedence: explicit per-page image → admin-set OG image → siteConfig default.
+  const ogImage = resolveImageUrl(image ?? settings.ogImageUrl ?? siteConfig.seo.ogImage);
 
   return (
     <Helmet>
