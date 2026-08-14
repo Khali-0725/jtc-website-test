@@ -10,12 +10,22 @@ interface VideoPlayerProps {
 
 /* Renders a poster with a play button; on activation swaps in the
    embedded player. If no URL is provided, shows a "coming soon" state.
-   Supports YouTube/Vimeo embeds and direct video files. */
+   Supports YouTube/Vimeo/Facebook embeds and direct video files. */
 function toEmbedUrl(url: string): { type: 'iframe' | 'video'; src: string } {
   const yt = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
   if (yt) return { type: 'iframe', src: `https://www.youtube-nocookie.com/embed/${yt[1]}?autoplay=1` };
   const vimeo = url.match(/vimeo\.com\/(\d+)/);
   if (vimeo) return { type: 'iframe', src: `https://player.vimeo.com/video/${vimeo[1]}?autoplay=1` };
+  // Facebook videos / reels / watch links — use the official video plugin.
+  // The video must be PUBLIC for the plugin to render it.
+  if (/(?:facebook\.com|fb\.watch)\//.test(url)) {
+    return {
+      type: 'iframe',
+      src: `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(
+        url,
+      )}&show_text=false&autoplay=true`,
+    };
+  }
   return { type: 'video', src: url };
 }
 
