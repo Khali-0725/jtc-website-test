@@ -17,12 +17,16 @@ function toEmbedUrl(url: string): { type: 'iframe' | 'video'; src: string } {
   const vimeo = url.match(/vimeo\.com\/(\d+)/);
   if (vimeo) return { type: 'iframe', src: `https://player.vimeo.com/video/${vimeo[1]}?autoplay=1` };
   // Facebook videos / reels / watch links — use the official video plugin.
-  // The video must be PUBLIC for the plugin to render it.
+  // The video must be PUBLIC for the plugin to render it. When a numeric
+  // video id is present we normalise to the canonical watch URL, which the
+  // plugin resolves reliably (tokenised /share/v/ links do NOT embed).
   if (/(?:facebook\.com|fb\.watch)\//.test(url)) {
+    const idMatch = url.match(/(?:\/videos\/|[?&]v=)(\d+)/);
+    const href = idMatch ? `https://www.facebook.com/watch/?v=${idMatch[1]}` : url;
     return {
       type: 'iframe',
       src: `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(
-        url,
+        href,
       )}&show_text=false&autoplay=true`,
     };
   }
