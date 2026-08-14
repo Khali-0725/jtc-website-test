@@ -14,6 +14,19 @@
     radial-gradient(90% 120% at 85% -20%, rgba(46, 139, 255, 0.14), transparent 55%),
     var(--bg-900, #05070a);
 }
+.photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(5, 7, 10, 0.9) 0%, rgba(5, 7, 10, 0.6) 55%, rgba(5, 7, 10, 0.4) 100%);
+}
 .glow {
   position: absolute;
   top: -40%;
