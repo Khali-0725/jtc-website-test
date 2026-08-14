@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 import { Routes, Route, Outlet } from 'react-router-dom';
 import { AuthProvider } from '@/context/AuthContext';
 import { ToastProvider } from '@/context/ToastContext';
+import { SettingsProvider } from '@/context/SettingsContext';
 import { Navbar, Footer, PageTransition } from '@/components/layout';
 import { Loading } from '@/components/common';
 import { AdminLayout, RequireAuth } from '@/admin';
@@ -35,6 +36,7 @@ const AdminAnnouncements = lazy(() => import('@/admin/pages/Announcements'));
 const AdminPrayer = lazy(() => import('@/admin/pages/PrayerRequests'));
 const AdminMessages = lazy(() => import('@/admin/pages/Messages'));
 const AdminUsers = lazy(() => import('@/admin/pages/Users'));
+const AdminBranding = lazy(() => import('@/admin/pages/Branding'));
 
 function PageFallback() {
   return (
@@ -70,7 +72,8 @@ export function App() {
   return (
     <AuthProvider>
       <ToastProvider>
-        <Routes>
+        <SettingsProvider>
+          <Routes>
           {/* Public site */}
           <Route element={<PublicLayout />}>
             <Route path="/" element={<Home />} />
@@ -127,8 +130,17 @@ export function App() {
                 </RequireAuth>
               }
             />
+            <Route
+              path="settings"
+              element={
+                <RequireAuth roles={['SUPER_ADMIN']}>
+                  <AdminBranding />
+                </RequireAuth>
+              }
+            />
           </Route>
         </Routes>
+        </SettingsProvider>
       </ToastProvider>
     </AuthProvider>
   );
