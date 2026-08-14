@@ -5,6 +5,7 @@ import type {
   Ministry as PMinistry,
   Series as PSeries,
   Sermon as PSermon,
+  SiteSettings as PSiteSettings,
   Speaker as PSpeaker,
   StaffMember as PStaff,
   User as PUser,
@@ -139,6 +140,17 @@ export function toAnnouncement(a: PAnnouncement) {
     body: a.body,
     date: dateOnly(a.date) as string,
     link: orUndef(a.link),
+  };
+}
+
+export function toSiteSettings(s: PSiteSettings) {
+  return {
+    logoUrl: orUndef(s.logoUrl),
+    heroImageUrl: orUndef(s.heroImageUrl),
+    pageHeaderImageUrl: orUndef(s.pageHeaderImageUrl),
+    ogImageUrl: orUndef(s.ogImageUrl),
+    accentColor: orUndef(s.accentColor),
+    updatedAt: s.updatedAt.toISOString(),
   };
 }
 
