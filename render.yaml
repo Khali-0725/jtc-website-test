@@ -23,16 +23,18 @@ databases:
     databaseName: jtc
     user: jtc
     plan: free
-    region: oregon # MUST match the web service region, else the
-                   # internal DB hostname is unreachable (P1001).
+    region: singapore # MUST match the web service region, else the
+                      # internal DB hostname is unreachable (P1001).
+                      # Singapore = closest to the Philippines (low latency).
 
 services:
   - type: web
     name: jtc-website
     runtime: node
     plan: free
-    region: oregon # Render's default region. MUST match jtc-db's region
-                   # so the internal DB hostname is reachable at runtime.
+    region: singapore # Closest region to the Philippines. MUST match
+                      # jtc-db's region so the internal DB hostname is
+                      # reachable at runtime.
     healthCheckPath: /api/health
     # --include=dev is required: Render sets NODE_ENV=production, which
     # would otherwise make `npm install` skip vite/prisma/tsx (all needed
