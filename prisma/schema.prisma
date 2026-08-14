@@ -268,3 +268,20 @@ model ContactMessage {
   @@index([handled])
   @@index([createdAt])
 }
+
+// ------------------------------------------------------------------
+//  Site settings — editable branding (single-row / singleton table).
+//  Admin (SUPER_ADMIN) can override logo, backgrounds, social image
+//  and accent color at runtime WITHOUT a redeploy. Every field is
+//  optional; empty means "fall back to the built-in siteConfig
+//  default". The row id is always "singleton".
+// ------------------------------------------------------------------
+model SiteSettings {
+  id                 String   @id @default("singleton")
+  logoUrl            String? // navbar + footer logo image (else the SVG wordmark)
+  heroImageUrl       String? // homepage hero background photo
+  pageHeaderImageUrl String? // interior page-header background photo
+  ogImageUrl         String? // social / link-share preview image
+  accentColor        String? // hex accent color, e.g. #35e0ff
+  updatedAt          DateTime @updatedAt
+}
