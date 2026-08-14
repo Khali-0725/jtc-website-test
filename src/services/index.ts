@@ -10,4 +10,5 @@ export { userService } from './userService';
 export { searchService } from './searchService';
 export { authService } from './authService';
 export { mediaService } from './mediaService';
+export { settingsService } from './settingsService';
 export { api, apiRequest, ApiError } from './apiClient';
