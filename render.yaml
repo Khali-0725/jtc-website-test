@@ -23,6 +23,8 @@ databases:
     databaseName: jtc
     user: jtc
     plan: free
+    region: singapore # MUST match the web service region, else the
+                      # internal DB hostname is unreachable (P1001).
 
 services:
   - type: web
@@ -35,13 +37,20 @@ services:
     # would otherwise make `npm install` skip vite/prisma/tsx (all needed
     # to build and run). We run TS directly with tsx and skip `tsc` so a
     # stray type error can never block a deploy.
+    #
+    # IMPORTANT: the DB is NOT reachable during the build (Render's build
+    # pipeline has no private-network access). So the build only installs
+    # deps, generates the Prisma client, and builds the frontend. The
+    # schema sync + seed run in startCommand, where the DB IS reachable.
+    # Both are idempotent, so re-running them on each start/cold-wake is safe.
     buildCommand: >-
       npm install --include=dev &&
       npx prisma generate &&
-      npx vite build &&
+      npx vite build
+    startCommand: >-
       npx prisma db push --accept-data-loss &&
-      npx tsx prisma/seed.ts
-    startCommand: npx tsx server/server.ts
+      npx tsx prisma/seed.ts &&
+      npx tsx server/server.ts
     envVars:
       - key: NODE_ENV
         value: production
