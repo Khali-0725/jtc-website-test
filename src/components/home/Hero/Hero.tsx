@@ -1,17 +1,26 @@
 import { Button } from '@/components/common/Button';
 import { Container } from '@/components/common/Container';
 import { siteConfig } from '@/config/siteConfig';
+import { useSettings } from '@/context/SettingsContext';
 import styles from './Hero.module.css';
 
-/* Full-bleed cinematic hero. Uses a branded gradient stage (no
-   photo dependency) with an optional real hero image dropped in
-   via CSS custom prop --hero-image later. */
+/* Full-bleed cinematic hero. Uses a branded gradient stage by
+   default; when an admin sets a hero background image in
+   Admin → Branding it renders behind a legibility scrim. */
 export function Hero() {
   const next = siteConfig.serviceTimes[0];
+  const { settings } = useSettings();
+  const heroImage = settings.heroImageUrl?.trim();
 
   return (
     <section className={styles.hero} aria-label="Welcome">
       <div className={styles.stage} aria-hidden="true">
+        {heroImage && (
+          <>
+            <div className={styles.photo} style={{ backgroundImage: `url(${heroImage})` }} />
+            <div className={styles.scrim} />
+          </>
+        )}
         <div className={styles.glow} />
         <div className={styles.grid} />
       </div>
