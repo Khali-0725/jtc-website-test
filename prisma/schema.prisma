@@ -1,0 +1,270 @@
+// ============================================================
+//  Jesus The Counselor Cavite — Prisma schema
+//  Models mirror the frontend domain types in src/types/content.ts
+//  and src/types/auth.ts. Serializers (server/models) flatten these
+//  relational rows into the exact shapes the frontend services expect.
+// ============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// --- Access control roles (mirrors UserRole in src/types/auth.ts) ---
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+  STAFF
+}
+
+// ------------------------------------------------------------------
+//  Users & sessions
+// ------------------------------------------------------------------
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         Role     @default(STAFF)
+  isActive     Boolean  @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  refreshTokens    RefreshToken[]
+  handledPrayers   PrayerRequest[]  @relation("PrayerHandledBy")
+  handledMessages  ContactMessage[] @relation("ContactHandledBy")
+
+  @@index([role])
+  @@index([isActive])
+}
+
+// Refresh-token rotation store. We persist a SHA-256 hash of the issued
+// token (never the raw value); the row id doubles as the JWT `jti`.
+model RefreshToken {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String   @unique
+  userAgent String?
+  ip        String?
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+// ------------------------------------------------------------------
+//  Sermons, speakers & series
+// ------------------------------------------------------------------
+model Speaker {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  slug      String   @unique
+  photo     String?
+  bio       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sermons Sermon[]
+}
+
+model Series {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  description String?
+  artwork     String?
+  startDate   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  sermons Sermon[]
+}
+
+model Sermon {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  description     String
+  speakerName     String // denormalized to match flat frontend `speaker`
+  speakerId       String?
+  seriesTitle     String? // denormalized to match flat frontend `series`
+  seriesId        String?
+  date            DateTime
+  durationMinutes Int
+  thumbnail       String
+  videoUrl        String?
+  audioUrl        String?
+  tags            String[]
+  scripture       String?
+  featured        Boolean  @default(false)
+  published       Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  speaker Speaker? @relation(fields: [speakerId], references: [id], onDelete: SetNull)
+  series  Series?  @relation(fields: [seriesId], references: [id], onDelete: SetNull)
+
+  @@index([date])
+  @@index([published])
+  @@index([featured])
+  @@index([speakerId])
+  @@index([seriesId])
+}
+
+// ------------------------------------------------------------------
+//  Events
+// ------------------------------------------------------------------
+model Event {
+  id              String    @id @default(cuid())
+  title           String
+  slug            String    @unique
+  description     String
+  category        String // validated against EventCategory union in zod
+  startDate       DateTime
+  endDate         DateTime?
+  time            String
+  locationName    String
+  address         String?
+  image           String
+  registrationUrl String?
+  featured        Boolean   @default(false)
+  published       Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([startDate])
+  @@index([category])
+  @@index([published])
+  @@index([featured])
+}
+
+// ------------------------------------------------------------------
+//  Ministries
+// ------------------------------------------------------------------
+model Ministry {
+  id           String   @id @default(cuid())
+  name         String
+  slug         String   @unique
+  category     String // validated against MinistryCategory union in zod
+  tagline      String
+  description  String
+  audience     String
+  schedule     String
+  location     String
+  contactEmail String?
+  image        String
+  ctaLabel     String?
+  ctaUrl       String?
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([category])
+}
+
+// ------------------------------------------------------------------
+//  Locations (serviceTimes stored as JSON array of ServiceTime)
+// ------------------------------------------------------------------
+model Location {
+  id           String   @id @default(cuid())
+  name         String
+  slug         String   @unique
+  isMainCampus Boolean  @default(false)
+  addressLine  String
+  city         String
+  region       String
+  country      String
+  phone        String?
+  email        String?
+  image        String
+  mapEmbedUrl  String?
+  mapLink      String?
+  serviceTimes Json     @default("[]")
+  parking      String?
+  accessibility String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([isMainCampus])
+}
+
+// ------------------------------------------------------------------
+//  Staff / leadership
+// ------------------------------------------------------------------
+model StaffMember {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  photo     String?
+  bio       String?
+  order     Int      @default(99)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([order])
+}
+
+// ------------------------------------------------------------------
+//  Announcements
+// ------------------------------------------------------------------
+model Announcement {
+  id        String   @id @default(cuid())
+  title     String
+  body      String
+  date      DateTime
+  link      String?
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([active])
+  @@index([date])
+}
+
+// ------------------------------------------------------------------
+//  Prayer requests & contact messages (public submissions)
+// ------------------------------------------------------------------
+model PrayerRequest {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  request     String
+  anonymous   Boolean  @default(false)
+  handled     Boolean  @default(false)
+  handledById String?
+  handledAt   DateTime?
+  createdAt   DateTime @default(now())
+
+  handledBy User? @relation("PrayerHandledBy", fields: [handledById], references: [id], onDelete: SetNull)
+
+  @@index([handled])
+  @@index([createdAt])
+}
+
+model ContactMessage {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  subject     String
+  message     String
+  handled     Boolean  @default(false)
+  handledById String?
+  handledAt   DateTime?
+  createdAt   DateTime @default(now())
+
+  handledBy User? @relation("ContactHandledBy", fields: [handledById], references: [id], onDelete: SetNull)
+
+  @@index([handled])
+  @@index([createdAt])
+}

@@ -1,0 +1,18 @@
+.message {
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  margin: 0 0 var(--space-5);
+  max-width: 52ch;
+}
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+/* Destructive confirm button: override accent with danger. */
+.danger {
+  background: var(--danger) !important;
+  border-color: var(--danger) !important;
+  color: #2b0b0b !important;
+}

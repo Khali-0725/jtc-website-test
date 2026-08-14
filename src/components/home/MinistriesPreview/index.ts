@@ -1,0 +1,1 @@
+export { MinistriesPreview } from './MinistriesPreview';

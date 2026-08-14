@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 62ch;
+}
+.center {
+  align-items: center;
+  text-align: center;
+  margin-inline: auto;
+}
+.left {
+  align-items: flex-start;
+}
+.title {
+  margin-top: var(--space-1);
+}
+.desc {
+  margin-top: var(--space-1);
+}

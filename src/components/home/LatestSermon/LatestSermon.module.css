@@ -1,0 +1,59 @@
+.wrap {
+  position: relative;
+}
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+.allLink {
+  white-space: nowrap;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+}
+.player {
+  border-radius: var(--radius-lg, 16px);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.title {
+  font-size: var(--fs-h2);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+.sub {
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+}
+.scripture {
+  color: var(--accent);
+  font-weight: var(--fw-medium);
+}
+.desc {
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 52ch;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: 1.35fr 1fr;
+  }
+}

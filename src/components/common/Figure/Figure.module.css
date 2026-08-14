@@ -1,0 +1,60 @@
+.figure {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  background: var(--surface);
+  width: 100%;
+}
+.rounded {
+  border-radius: var(--radius-lg);
+}
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+/* Branded gradient poster (cyan/black identity) */
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(
+      120% 120% at 15% 10%,
+      hsla(var(--ph-hue), 90%, 55%, 0.28) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      140% 120% at 100% 100%,
+      hsla(212, 90%, 58%, 0.22) 0%,
+      transparent 50%
+    ),
+    linear-gradient(150deg, var(--bg-700) 0%, var(--bg-900) 100%);
+}
+.placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 26px 26px;
+  opacity: 0.6;
+}
+.monogram {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.14);
+  text-transform: uppercase;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--grad-overlay-bottom);
+  pointer-events: none;
+}

@@ -1,0 +1,1 @@
+export { MinistryCard } from './MinistryCard';

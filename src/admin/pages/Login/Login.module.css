@@ -1,0 +1,65 @@
+.wrap {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-6) var(--gutter);
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(46, 139, 255, 0.14) 0%, transparent 60%),
+    var(--bg-900);
+}
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  box-shadow: var(--shadow-lg);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+.mark {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--grad-accent);
+  color: var(--accent-contrast);
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  flex-shrink: 0;
+}
+.title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  color: var(--text);
+  margin: 0;
+  line-height: 1.1;
+}
+.subtitle {
+  margin: 2px 0 0;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+.form {
+  margin-top: var(--space-2);
+}
+.error {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--danger-soft);
+  color: var(--danger);
+  font-size: var(--fs-sm);
+}
+.footnote {
+  margin: var(--space-5) 0 0;
+  text-align: center;
+  font-size: var(--fs-xs);
+  color: var(--text-subtle);
+}

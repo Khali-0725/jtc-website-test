@@ -1,0 +1,1 @@
+export { SermonCard } from './SermonCard';

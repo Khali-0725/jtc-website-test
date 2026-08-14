@@ -1,0 +1,17 @@
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+.search {
+  max-width: 340px;
+}
+.strong {
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+}
+.pagination {
+  margin-top: var(--space-5);
+}

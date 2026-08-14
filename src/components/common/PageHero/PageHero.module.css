@@ -1,0 +1,56 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  padding-top: calc(var(--navbar-h) + clamp(2.5rem, 6vw, 5rem));
+  padding-bottom: clamp(2.5rem, 6vw, 4.5rem);
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.stage {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(90% 120% at 85% -20%, rgba(46, 139, 255, 0.14), transparent 55%),
+    var(--bg-900, #05070a);
+}
+.glow {
+  position: absolute;
+  top: -40%;
+  right: -5%;
+  width: 45vw;
+  height: 45vw;
+  max-width: 620px;
+  background: radial-gradient(circle, rgba(53, 224, 255, 0.14), transparent 60%);
+  filter: blur(40px);
+}
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 62ch;
+}
+.center .inner {
+  align-items: center;
+  text-align: center;
+  margin-inline: auto;
+}
+.title {
+  font-size: var(--fs-h1);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.description {
+  color: var(--text-muted);
+  font-size: var(--fs-lead);
+  line-height: 1.7;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+.center .actions {
+  justify-content: center;
+}

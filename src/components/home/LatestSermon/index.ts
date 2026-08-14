@@ -1,0 +1,1 @@
+export { LatestSermon } from './LatestSermon';

@@ -1,0 +1,188 @@
+/* --- Service Times band --- */
+.timesBand {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(80% 120% at 50% 0%, rgba(46, 139, 255, 0.08), transparent 60%),
+    var(--bg-800);
+  border-block: 1px solid var(--border);
+}
+.timesHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  text-align: center;
+  align-items: center;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+.timesTitle {
+  font-size: var(--fs-h2);
+  letter-spacing: -0.015em;
+  max-width: 20ch;
+}
+.times {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 720px;
+}
+.timeCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition:
+    border-color var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+.timeCard:hover {
+  border-color: var(--accent-soft);
+  transform: translateY(-3px);
+}
+.timeNote {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+.timeDay {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  color: var(--text);
+}
+.slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.slot {
+  font-size: var(--fs-lead);
+  color: var(--text-muted);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+}
+
+@media (min-width: 640px) {
+  .times {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- What to Expect grid --- */
+.expectGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+.expectCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition:
+    border-color var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+.expectCard:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-3px);
+}
+.expectMarker {
+  width: 46px;
+  height: 3px;
+  border-radius: var(--radius-pill);
+  background: var(--grad-accent);
+}
+.expectTitle {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  color: var(--text);
+}
+.expectBody {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 640px) {
+  .expectGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .expectGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* --- Getting Here --- */
+.gettingBand {
+  border-block: 1px solid var(--border);
+}
+.getting {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+.gettingText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 60ch;
+}
+.gettingAddress {
+  font-style: normal;
+  color: var(--text);
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  max-width: 44ch;
+}
+.gettingNote {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.gettingActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+/* --- Closing CTA --- */
+.ctaBand {
+  text-align: center;
+}
+.cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+.ctaTitle {
+  font-size: var(--fs-h2);
+  letter-spacing: var(--tracking-tight);
+}
+.ctaText {
+  color: var(--text-muted);
+  font-size: var(--fs-lead);
+  line-height: 1.7;
+  max-width: 50ch;
+}
+.ctaActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+  margin-top: var(--space-2);
+}

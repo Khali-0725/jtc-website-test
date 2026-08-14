@@ -1,0 +1,49 @@
+/* ============================================================
+   Responsive helpers — display utilities per breakpoint.
+   Intentional layouts live in each component's own .module.css;
+   these are shared show/hide + spacing helpers only.
+   Breakpoints: sm 480 / md 768 / lg 1024 / xl 1280
+   ============================================================ */
+
+/* Hide on mobile (< md) */
+.hide-mobile {
+  display: initial;
+}
+@media (max-width: 767px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* Show only on mobile (< md) */
+.show-mobile {
+  display: none;
+}
+@media (max-width: 767px) {
+  .show-mobile {
+    display: initial !important;
+  }
+}
+
+/* Hide on desktop (>= lg) */
+@media (min-width: 1024px) {
+  .hide-desktop {
+    display: none !important;
+  }
+}
+
+/* Reduce section padding on small screens handled by clamp() tokens.
+   Fine-tune stacking for very small phones. */
+@media (max-width: 360px) {
+  :root {
+    --gutter: 1.1rem;
+  }
+}
+
+/* Respect users who prefer a larger tap area on coarse pointers */
+@media (pointer: coarse) {
+  .tap-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}

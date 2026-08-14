@@ -1,0 +1,45 @@
+.frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-900);
+}
+.media {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+}
+.play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: var(--grad-accent);
+  color: var(--accent-contrast);
+  display: grid;
+  place-items: center;
+  box-shadow: var(--glow-accent);
+  transition: transform var(--dur-base) var(--ease-out);
+  animation: pulse-glow 2.6s ease-in-out infinite;
+}
+.play:hover {
+  transform: scale(1.06);
+}
+.playIcon {
+  font-size: 1.6rem;
+  margin-left: 4px;
+}
+.soon {
+  position: absolute;
+  inset: auto 0 var(--space-5) 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}

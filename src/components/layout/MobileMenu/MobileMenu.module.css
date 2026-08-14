@@ -1,0 +1,110 @@
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-mobile-menu);
+  background: var(--bg-900);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-5) var(--gutter) var(--space-6);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out),
+    visibility var(--dur-base);
+}
+.menu::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 80% at 100% 0%, rgba(53, 224, 255, 0.12), transparent 55%);
+  pointer-events: none;
+}
+.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--navbar-h);
+}
+.brand {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.01em;
+}
+.close {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 1.1rem;
+}
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+  flex: 1;
+}
+.link {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 9vw, 2.75rem);
+  font-weight: var(--fw-bold);
+  color: var(--text);
+  letter-spacing: -0.02em;
+  opacity: 0;
+  transform: translateX(-12px);
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+.open .link {
+  opacity: 1;
+  transform: translateX(0);
+}
+.link:active,
+.active {
+  color: var(--accent);
+}
+.secondary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--border);
+}
+.secondaryLink {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.times {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+}
+.times strong {
+  color: var(--text);
+}
+
+@media (min-width: 1024px) {
+  .menu {
+    display: none;
+  }
+}

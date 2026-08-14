@@ -1,0 +1,150 @@
+/* ============================================================
+   Jesus The Counselor Cavite — Design Tokens
+   Single source of truth for color, type, space, motion.
+   Do NOT hardcode raw values in components; reference these.
+   ============================================================ */
+
+:root {
+  /* --- Brand palette: dark foundation + electric cyan/blue --- */
+  --jtc-black: #05070a;
+  --jtc-cyan: #35e0ff;
+  --jtc-blue: #2e8bff;
+
+  /* --- Backgrounds (darkest -> elevated) --- */
+  --bg-900: #05070a; /* page base */
+  --bg-800: #090d13;
+  --bg-700: #0f141d;
+  --surface: #141a24; /* cards */
+  --surface-2: #1a2230; /* elevated cards, inputs */
+  --surface-3: #222c3b;
+
+  /* --- Borders / dividers --- */
+  --border: #1e2733;
+  --border-strong: #2b3746;
+  --hairline: rgba(255, 255, 255, 0.07);
+
+  /* --- Text --- */
+  --text: #f4f7fb; /* warm white */
+  --text-muted: #9aa7b8; /* neutral gray */
+  --text-subtle: #66748a;
+  --text-inverse: #05070a;
+
+  /* --- Accent (cyan/electric blue) --- */
+  --accent: #35e0ff;
+  --accent-600: #14c4e8;
+  --accent-700: #0ea5c9;
+  --accent-blue: #2e8bff;
+  --accent-contrast: #04141a; /* text on accent surfaces */
+  --accent-soft: rgba(53, 224, 255, 0.12);
+  --accent-softer: rgba(53, 224, 255, 0.06);
+
+  /* --- Gradients --- */
+  --grad-accent: linear-gradient(115deg, var(--accent) 0%, var(--accent-blue) 100%);
+  --grad-accent-text: linear-gradient(100deg, #7ff0ff 0%, #35e0ff 45%, #2e8bff 100%);
+  --grad-overlay-bottom: linear-gradient(
+    180deg,
+    rgba(5, 7, 10, 0) 0%,
+    rgba(5, 7, 10, 0.55) 55%,
+    rgba(5, 7, 10, 0.96) 100%
+  );
+  --grad-overlay-cinema: linear-gradient(
+    180deg,
+    rgba(5, 7, 10, 0.35) 0%,
+    rgba(5, 7, 10, 0.15) 35%,
+    rgba(5, 7, 10, 0.85) 100%
+  );
+
+  /* --- Status --- */
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --danger-soft: rgba(248, 113, 113, 0.12);
+
+  /* --- Glow (neon worship accent, used sparingly) --- */
+  --glow-accent: 0 0 0 1px rgba(53, 224, 255, 0.35), 0 0 24px rgba(53, 224, 255, 0.28);
+  --glow-text: 0 0 22px rgba(53, 224, 255, 0.45);
+
+  /* --- Typography families --- */
+  --font-display: 'Sora', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-script: 'Great Vibes', cursive;
+
+  /* --- Fluid type scale (clamp: min, preferred, max) --- */
+  --fs-display: clamp(2.75rem, 1.5rem + 6vw, 6.5rem);
+  --fs-h1: clamp(2.25rem, 1.4rem + 3.6vw, 4rem);
+  --fs-h2: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
+  --fs-h3: clamp(1.35rem, 1.05rem + 1.2vw, 1.85rem);
+  --fs-h4: clamp(1.15rem, 1rem + 0.5vw, 1.35rem);
+  --fs-lead: clamp(1.05rem, 0.98rem + 0.4vw, 1.3rem);
+  --fs-body: 1rem;
+  --fs-sm: 0.9rem;
+  --fs-xs: 0.78rem;
+  --fs-eyebrow: 0.8rem;
+
+  /* --- Weights / line-height / tracking --- */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-black: 800;
+  --lh-tight: 1.05;
+  --lh-snug: 1.25;
+  --lh-normal: 1.6;
+  --tracking-tight: -0.02em;
+  --tracking-wide: 0.02em;
+  --tracking-eyebrow: 0.22em;
+
+  /* --- Spacing scale (8px base) --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+  --section-y: clamp(4rem, 2rem + 8vw, 8rem);
+
+  /* --- Radii --- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* --- Shadows (restrained) --- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.55);
+
+  /* --- Motion --- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur-base: 260ms;
+  --dur-slow: 520ms;
+  --dur-reveal: 900ms;
+
+  /* --- Layout --- */
+  --container-max: 1280px;
+  --container-wide: 1440px;
+  --container-narrow: 820px;
+  --gutter: clamp(1.25rem, 0.5rem + 3vw, 3rem);
+  --navbar-h: 76px;
+
+  /* --- Z-index scale --- */
+  --z-base: 1;
+  --z-sticky: 100;
+  --z-navbar: 200;
+  --z-mobile-menu: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+
+  /* --- Breakpoints (reference values; used in media queries) --- */
+  --bp-sm: 480px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+}

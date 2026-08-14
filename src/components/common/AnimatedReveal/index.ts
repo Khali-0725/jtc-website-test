@@ -1,0 +1,1 @@
+export { AnimatedReveal } from './AnimatedReveal';

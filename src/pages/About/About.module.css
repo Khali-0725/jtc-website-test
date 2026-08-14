@@ -1,0 +1,153 @@
+.story {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+.storyText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  color: var(--text-muted);
+  line-height: 1.8;
+  font-size: var(--fs-lead);
+}
+.storyMedia {
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  .story {
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+}
+
+/* --- What We Believe --- */
+.beliefsBand {
+  background:
+    radial-gradient(80% 120% at 50% 0%, rgba(46, 139, 255, 0.07), transparent 60%),
+    var(--bg-800);
+  border-block: 1px solid var(--border);
+}
+.beliefGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+.beliefCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition:
+    border-color var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+.beliefCard:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-3px);
+}
+.beliefMarker {
+  width: 46px;
+  height: 3px;
+  border-radius: var(--radius-pill);
+  background: var(--grad-accent);
+}
+.beliefTitle {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  color: var(--text);
+}
+.beliefBody {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 640px) {
+  .beliefGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .beliefGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* --- Leadership --- */
+.leaderGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+.leaderCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.leaderBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.leaderName {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  color: var(--text);
+}
+.leaderRole {
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--accent);
+}
+.leaderBio {
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-top: var(--space-2);
+}
+
+@media (min-width: 640px) {
+  .leaderGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .leaderGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* --- Closing CTA --- */
+.ctaBand {
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+.ctaTitle {
+  font-size: var(--fs-h2);
+  letter-spacing: var(--tracking-tight);
+}
+.ctaText {
+  color: var(--text-muted);
+  font-size: var(--fs-lead);
+  line-height: 1.7;
+  max-width: 48ch;
+}
+.ctaActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+  margin-top: var(--space-2);
+}
