@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { siteConfig } from '@/config/siteConfig';
 import { classNames } from '@/utils/helpers';
+import { useSettings } from '@/context/SettingsContext';
 import styles from './Logo.module.css';
 
 interface LogoProps {
@@ -10,9 +11,25 @@ interface LogoProps {
 
 /* Site wordmark for the header/footer.
    NOTE: This is a typographic wordmark + placeholder glyph — it does NOT
-   redesign the church's official logo (white dove + blue cross). Drop the
-   real logo at siteConfig.brand.logoSrc to display it instead. */
+   redesign the church's official logo (white dove + blue cross). Set a
+   logo image URL in Admin → Branding to display the real logo instead. */
 export function Logo({ variant = 'full', className }: LogoProps) {
+  const { settings } = useSettings();
+  const logoUrl = settings.logoUrl?.trim();
+
+  // Admin-supplied logo image takes precedence over the built-in wordmark.
+  if (logoUrl) {
+    return (
+      <Link
+        to="/"
+        className={classNames(styles.logo, className)}
+        aria-label={`${siteConfig.name} — home`}
+      >
+        <img className={styles.image} src={logoUrl} alt={siteConfig.name} />
+      </Link>
+    );
+  }
+
   return (
     <Link to="/" className={classNames(styles.logo, className)} aria-label={`${siteConfig.name} — home`}>
       <span className={styles.mark} aria-hidden="true">
