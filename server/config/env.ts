@@ -33,6 +33,10 @@ const schema = z.object({
   CORS_ORIGINS: z.string().optional(),
   CLIENT_URL: z.string().url().default('http://localhost:5173'),
   COOKIE_DOMAIN: z.string().optional(),
+  // Render injects the service's public URL automatically. We fold it into
+  // the CORS allow-list so the single-origin SPA can call its own /api
+  // without any manual configuration on deploy.
+  RENDER_EXTERNAL_URL: z.string().url().optional(),
 });
 
 const parsed = schema.safeParse(process.env);
@@ -65,10 +69,17 @@ if (isProd) {
   }
 }
 
-const corsOrigins = (raw.CORS_ORIGINS ?? raw.CLIENT_URL)
-  .split(',')
-  .map((o) => o.trim())
-  .filter(Boolean);
+const corsOrigins = Array.from(
+  new Set(
+    (raw.CORS_ORIGINS ?? raw.CLIENT_URL)
+      .split(',')
+      .map((o) => o.trim())
+      .filter(Boolean)
+      // Always allow the app's own public origin on Render (single-origin SPA
+      // calling its own /api). Render sets RENDER_EXTERNAL_URL automatically.
+      .concat(raw.RENDER_EXTERNAL_URL ? [raw.RENDER_EXTERNAL_URL.replace(/\/$/, '')] : []),
+  ),
+);
 
 export const env = {
   nodeEnv: raw.NODE_ENV,
