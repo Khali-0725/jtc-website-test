@@ -174,6 +174,18 @@ async function seedRest() {
   console.log(`Seeded ${staff.length} staff, ${announcements.length} announcements, 1 location`);
 }
 
+async function seedSettings() {
+  // Create the single SiteSettings row if it does not exist yet.
+  // All fields stay null -> the site uses its built-in siteConfig
+  // defaults until an admin overrides them in the Branding page.
+  await prisma.siteSettings.upsert({
+    where: { id: 'singleton' },
+    update: {},
+    create: { id: 'singleton' },
+  });
+  console.log('Seeded site settings (singleton)');
+}
+
 async function main() {
   await seedAdmin();
   await seedSpeakersAndSeries();
@@ -181,6 +193,7 @@ async function main() {
   await seedEvents();
   await seedMinistries();
   await seedRest();
+  await seedSettings();
   console.log('Seed complete.');
 }
 
