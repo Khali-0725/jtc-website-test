@@ -10,6 +10,7 @@ import prayerRoutes from './prayerRoutes.js';
 import contactRoutes from './contactRoutes.js';
 import searchRoutes from './searchRoutes.js';
 import userRoutes from './userRoutes.js';
+import settingsRoutes from './settingsRoutes.js';
 
 /* ============================================================
    API router — mounts every module under /api.
@@ -36,5 +37,6 @@ api.use('/prayer', prayerRoutes);
 api.use('/contact', contactRoutes);
 api.use('/search', searchRoutes);
 api.use('/users', userRoutes);
+api.use('/settings', settingsRoutes);
 
 export default api;
