@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { Container } from '../Container';
+import { useSettings } from '@/context/SettingsContext';
 import styles from './PageHero.module.css';
 
 interface PageHeroProps {
@@ -11,11 +12,22 @@ interface PageHeroProps {
 }
 
 /* Interior page header band — branded gradient stage with a
-   consistent title treatment across all secondary pages. */
+   consistent title treatment across all secondary pages. When an
+   admin sets a page-header background image in Admin → Branding it
+   renders behind a legibility scrim. */
 export function PageHero({ eyebrow, title, description, align = 'left', children }: PageHeroProps) {
+  const { settings } = useSettings();
+  const bg = settings.pageHeaderImageUrl?.trim();
+
   return (
     <section className={`${styles.hero} ${align === 'center' ? styles.center : ''}`}>
       <div className={styles.stage} aria-hidden="true">
+        {bg && (
+          <>
+            <div className={styles.photo} style={{ backgroundImage: `url(${bg})` }} />
+            <div className={styles.scrim} />
+          </>
+        )}
         <div className={styles.glow} />
       </div>
       <Container size="wide">
