@@ -4,6 +4,13 @@
   gap: var(--space-3);
   flex-shrink: 0;
 }
+.image {
+  display: block;
+  height: 44px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+}
 .mark {
   display: grid;
   place-items: center;
