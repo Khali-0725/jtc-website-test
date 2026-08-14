@@ -34,7 +34,8 @@ export type AdminIconName =
   | 'external'
   | 'menu'
   | 'close'
-  | 'check';
+  | 'check'
+  | 'image';
 
 const paths: Record<AdminIconName, ReactNode> = {
   grid: (
@@ -115,6 +116,13 @@ const paths: Record<AdminIconName, ReactNode> = {
   menu: <path d="M4 7h16M4 12h16M4 17h16" />,
   close: <path d="M6 6l12 12M18 6L6 18" />,
   check: <path d="M5 12l4.5 4.5L19 7" />,
+  image: (
+    <>
+      <rect x="3" y="4.5" width="18" height="15" rx="2" />
+      <circle cx="8.5" cy="9.5" r="1.6" />
+      <path d="M4 17l5-4.5 4 3 3-2.5 4 3.5" />
+    </>
+  ),
 };
 
 export function AdminIcon({ name, size = 20 }: { name: AdminIconName; size?: number }) {
